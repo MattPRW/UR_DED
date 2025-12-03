@@ -1,1 +1,0 @@
-# UR_DED Project
