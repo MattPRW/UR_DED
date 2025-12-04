@@ -1,0 +1,29 @@
+datasource db {
+  provider = "sqlite"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Game {
+  id         String   @id @default(cuid())
+  adminToken String
+  createdAt  DateTime @default(now())
+  status     String   @default("LOBBY")
+  players    Player[]
+}
+
+model Player {
+  id           String  @id @default(cuid())
+  game         Game    @relation(fields: [gameId], references: [id])
+  gameId       String
+  name         String
+  shareToken   String
+  weaponA      String?
+  weaponB      String?
+  chosenWeapon String?
+  location     String?
+  victimId     String?
+  alive        Boolean @default(true)
+}
